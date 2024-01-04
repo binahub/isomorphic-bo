@@ -12,7 +12,8 @@ export const authOptions: NextAuthOptions = {
   },
   session: {
     strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    // maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 1800, // 30 mins
   },
   callbacks: {
     async session({ session, token }) {
@@ -66,7 +67,7 @@ export const authOptions: NextAuthOptions = {
           }
         );
 
-        const user = await res.json();
+        const user = await res.json() as any;
 
         if (user && user.result == "0") {
           console.log('login',user);

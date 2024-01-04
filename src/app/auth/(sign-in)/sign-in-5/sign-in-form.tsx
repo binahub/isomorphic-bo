@@ -43,8 +43,8 @@ export default function SignInForm() {
               placeholder="Enter your email"
               color="info"
               className="[&>label>span]:font-medium"
-              {...register('email')}
-              error={errors.email?.message}
+              {...register('username')}
+              error={errors.username?.message}
             />
             <Password
               label="Password"

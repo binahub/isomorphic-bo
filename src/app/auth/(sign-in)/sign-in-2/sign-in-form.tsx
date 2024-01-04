@@ -13,7 +13,7 @@ import { routes } from '@/config/routes';
 import { loginSchema, LoginSchema } from '@/utils/validators/login.schema';
 
 const initialValues: LoginSchema = {
-  email: 'admin@admin.com',
+  username: 'admin@admin.com',
   password: 'admin',
   rememberMe: true,
 };
@@ -44,8 +44,8 @@ export default function SignInForm() {
               rounded="pill"
               color="info"
               className="[&>label>span]:font-medium"
-              {...register('email')}
-              error={errors.email?.message}
+              {...register('username')}
+              error={errors.username?.message}
             />
             <Password
               label="Password"
