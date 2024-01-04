@@ -51,17 +51,22 @@ export const authOptions: NextAuthOptions = {
         // You need to provide your own logic here that takes the credentials
         // submitted and returns either a object representing a user or value
         // that is false/null if the credentials are invalid
-        const user = {
-          email: 'admin@admin.com',
-          password: 'admin',
-        };
+        const res = await fetch(
+          'http://78.157.51.13/food/api/v1/unit/login/authenticate',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              username: credentials?.email,
+              password: credentials?.password,
+            }),
+          }
+        );
 
-        if (
-          isEqual(user, {
-            email: credentials?.email,
-            password: credentials?.password,
-          })
-        ) {
+        const user = await res.json();
+
+        if (user) {
+          console.log(user);
           return user as any;
         }
         return null;

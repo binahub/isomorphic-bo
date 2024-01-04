@@ -37,7 +37,7 @@ export const metaObject = (
         width: 1200,
         height: 630,
       },
-      locale: 'en_US',
+      locale: 'fa_IR',
       type: 'website',
     },
   };
