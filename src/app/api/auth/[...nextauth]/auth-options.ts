@@ -2,8 +2,8 @@ import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import { env } from '@/env.mjs';
-import isEqual from 'lodash/isEqual';
 import { pagesOptions } from './pages-options';
+import toast from 'react-hot-toast';
 
 export const authOptions: NextAuthOptions = {
   // debug: true,
@@ -16,18 +16,21 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async session({ session, token }) {
+      console.log('session',session)
+      console.log('sessionToken',token)
       return {
         ...session,
-        user: {
-          ...session.user,
-          id: token.idToken as string,
-        },
+        authResponse: token,
       };
     },
     async jwt({ token, user }) {
       if (user) {
+        console.log('userJWT',user)
+        console.log('tokenJWT',token)
         // return user as JWT
-        token.user = user;
+        // token.user = user;
+        token = {...token, ...user}
+        console.log('tokenJWT2',token)
       }
       return token;
     },
@@ -57,7 +60,7 @@ export const authOptions: NextAuthOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              username: credentials?.email,
+              username: credentials?.username,
               password: credentials?.password,
             }),
           }
@@ -65,17 +68,26 @@ export const authOptions: NextAuthOptions = {
 
         const user = await res.json();
 
-        if (user) {
-          console.log(user);
+        if (user && user.result == "0") {
+          console.log('login',user);
           return user as any;
+        }else if(user && user.description){
+          console.log('khata',user);
+          toast.error(user.description as string);
+          alert(user.description as string)
+          return null;
         }
+        console.log('hichi',user);
+
+        toast.error('خطا در دریافت اطلاعات');
+
         return null;
       },
     }),
-    GoogleProvider({
-      clientId: env.GOOGLE_CLIENT_ID || '',
-      clientSecret: env.GOOGLE_CLIENT_SECRET || '',
-      allowDangerousEmailAccountLinking: true,
-    }),
+    // GoogleProvider({
+    //   clientId: env.GOOGLE_CLIENT_ID || '',
+    //   clientSecret: env.GOOGLE_CLIENT_SECRET || '',
+    //   allowDangerousEmailAccountLinking: true,
+    // }),
   ],
 };

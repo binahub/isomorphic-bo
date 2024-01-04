@@ -74,6 +74,7 @@ export default {
       fontFamily: {
         inter: ['var(--font-inter)'],
         lexend: ['var(--font-lexend)'],
+        vazir: ["Vazir"],
       },
       // required these animations for the Loader component
       animation: {

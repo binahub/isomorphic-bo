@@ -13,20 +13,18 @@ export default function SignIn() {
     <AuthWrapperOne
       title={
         <>
-          Welcome back! Please{' '}
+          به پنل مدیریتی خوش آمدید{' '}
           <span className="relative inline-block">
-            Sign in to
+            برای ادامه 
             <UnderlineShape className="absolute -bottom-2 start-0 h-2.5 w-24 text-blue md:w-28 xl:-bottom-1.5 xl:w-36" />
           </span>{' '}
-          continue.
+         لاگین کنید
         </>
       }
-      description="By signing up, you will gain access to exclusive content, special
-      offers, and be the first to hear about exciting news and updates."
-      bannerTitle="The simplest way to manage your workspace."
-      bannerDescription="Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-      amet sint velit officia consequat duis."
-      isSocialLoginActive={true}
+      description="با لاگین در سامانه شما دسترسی خواهید داشت برای مشاهده و مدیریت گزارشات  "
+      bannerTitle="آسانترین روش برای مدیریت "
+      bannerDescription="تست بنر توضیحات"
+      isSocialLoginActive={false}
       pageImage={
         <div className="relative mx-auto aspect-[4/3.37] w-[500px] xl:w-[620px] 2xl:w-[820px]">
           <Image

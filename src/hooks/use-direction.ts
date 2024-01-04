@@ -40,7 +40,7 @@ export function useDirection() {
   );
 
   return {
-    direction: direction === null ? 'ltr' : direction,
+    direction: direction === null ? 'rtl' : direction,
     setDirection,
   };
 }
